@@ -10,6 +10,8 @@ def execute_rule(rule, data):
             return data[rule["field"]] <= rule["value"]
         case "e":
             return data[rule["field"]] == rule["value"]
+        case "ne":
+            return data[rule["field"]] != rule["value"]
         case "gt" | "nlte":
             return data[rule["field"]] > rule["value"]
         case "lt" | "ngte":

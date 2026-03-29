@@ -8,7 +8,15 @@ EXAMPLE_1 = {
     "revenue": 1000
 }
 
-RULE = "revenue is above 1000000"
+RULE = """
+credit_rating is above 50
+AND
+flood_risk is below 10
+OR
+revenue is above 1000000
+"""
+
+# RULE = "revenue is above 1000000"
 
 # RULE = """
 # revenue is above 1000000

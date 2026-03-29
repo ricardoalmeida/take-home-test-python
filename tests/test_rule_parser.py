@@ -1,20 +1,24 @@
 
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 
 class TestRuleParser(unittest.TestCase):
     def setUp(self) -> None:
-        statement_parser = Mock(
-            **{'parse_statement.side_effect': lambda value: value})
-
-        modules = {'rule_engine.statement_parser': statement_parser}
-        patch.dict('sys.modules', modules).start()
+        self.patcher = patch(
+            'rule_engine.rule_parser.parse_statement',
+            side_effect=lambda value: value
+        )
+        self.patcher.start()
 
         from rule_engine.rule_parser import parse_rule
         self.parse_rule = parse_rule
 
         return super().setUp()
+
+    def tearDown(self) -> None:
+        self.patcher.stop()
+        return super().tearDown()
 
     def test_simple_and_rule(self):
         rule = """\
